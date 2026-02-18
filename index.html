@@ -109,12 +109,19 @@ header {
     justify-content: center;
 }
 
+/* GALLERY */
 .gallery-container {
     position: relative;
     flex: 1;
     min-width: 320px;
     overflow: hidden;
     border-radius: 12px;
+    opacity: 0;
+    transition: opacity 0.4s ease;
+}
+
+.gallery-container.loaded {
+    opacity: 1;
 }
 
 .gallery-track {
@@ -125,6 +132,7 @@ header {
 .gallery-track img {
     width: 100%;
     flex-shrink: 0;
+    display: block;
 }
 
 /* ARROWS */
@@ -208,7 +216,7 @@ footer {
 
 <div class="wrapper">
 
-    <div class="gallery-container">
+    <div class="gallery-container" id="galleryContainer">
         <div class="arrow arrow-left" onclick="prevSlide()">&#10094;</div>
         <div class="arrow arrow-right" onclick="nextSlide()">&#10095;</div>
 
@@ -235,21 +243,44 @@ footer {
 
 <script>
 
+const imageSources = [
+"IMG_6573_2.png",
+"IMG_6575.png",
+"IMG_6576_2.png",
+"IMG_6577.png",
+"dior-saddle-pfp.png"
+];
+
 const track = document.getElementById("galleryTrack");
-const slides = document.querySelectorAll(".gallery-track img");
+const galleryContainer = document.getElementById("galleryContainer");
 let index = 0;
 
+/* PRELOAD ALL IMAGES */
+let loaded = 0;
+
+imageSources.forEach(src => {
+    const img = new Image();
+    img.src = src;
+    img.onload = () => {
+        loaded++;
+        if (loaded === imageSources.length) {
+            galleryContainer.classList.add("loaded");
+        }
+    };
+});
+
+/* SLIDE */
 function updateSlide() {
     track.style.transform = `translateX(-${index * 100}%)`;
 }
 
 function nextSlide() {
-    index = (index + 1) % slides.length;
+    index = (index + 1) % imageSources.length;
     updateSlide();
 }
 
 function prevSlide() {
-    index = (index - 1 + slides.length) % slides.length;
+    index = (index - 1 + imageSources.length) % imageSources.length;
     updateSlide();
 }
 
