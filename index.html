@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Top Tier Exotics</title>
+    <title>VendorHub</title>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
@@ -9,61 +9,65 @@
         body {
             margin: 0;
             font-family: Arial, sans-serif;
-            background-color: #0e0e0e;
+            background-color: #0f0f0f;
             color: white;
         }
 
         header {
             text-align: center;
-            padding: 60px 20px;
+            padding: 40px 20px;
             border-bottom: 1px solid #222;
+            font-size: 28px;
+            font-weight: bold;
         }
 
-        h1 {
-            letter-spacing: 2px;
-        }
-
-        .container {
+        .wrapper {
             max-width: 1100px;
-            margin: auto;
-            padding: 60px 20px;
+            margin: 60px auto;
+            padding: 20px;
             display: flex;
+            gap: 60px;
             flex-wrap: wrap;
-            gap: 40px;
+            align-items: center;
+            justify-content: center;
         }
 
-        .images {
+        .product-images {
             flex: 1;
-            min-width: 300px;
+            min-width: 320px;
         }
 
-        .images img {
+        .product-images img {
             width: 100%;
-            border-radius: 8px;
+            border-radius: 10px;
         }
 
         .thumbnails {
             display: flex;
             gap: 10px;
             margin-top: 15px;
-            flex-wrap: wrap;
         }
 
         .thumbnails img {
-            width: 70px;
-            cursor: pointer;
+            width: 75px;
             border-radius: 6px;
-            opacity: 0.7;
-            transition: 0.3s;
+            cursor: pointer;
+            opacity: 0.6;
+            transition: 0.2s;
         }
 
         .thumbnails img:hover {
             opacity: 1;
         }
 
-        .info {
+        .product-info {
             flex: 1;
             min-width: 300px;
+        }
+
+        .product-info h2 {
+            font-size: 32px;
+            margin-bottom: 10px;
         }
 
         .price {
@@ -71,18 +75,24 @@
             margin: 15px 0;
         }
 
-        .btn {
-            display: inline-block;
-            padding: 15px 40px;
-            background: white;
-            color: black;
-            text-decoration: none;
-            font-weight: bold;
-            border-radius: 4px;
-            margin-top: 20px;
+        ul {
+            line-height: 1.8;
+            padding-left: 18px;
         }
 
-        .btn:hover {
+        .buy-btn {
+            display: inline-block;
+            margin-top: 25px;
+            padding: 15px 50px;
+            background: #ff9900;
+            color: black;
+            font-weight: bold;
+            text-decoration: none;
+            border-radius: 6px;
+            transition: 0.2s;
+        }
+
+        .buy-btn:hover {
             opacity: 0.85;
         }
 
@@ -92,11 +102,7 @@
             border-top: 1px solid #222;
             margin-top: 60px;
             font-size: 14px;
-            opacity: 0.7;
-        }
-
-        ul {
-            line-height: 1.8;
+            opacity: 0.6;
         }
     </style>
 </head>
@@ -104,25 +110,24 @@
 <body>
 
 <header>
-    <h1>Top Tier Exotics</h1>
+    VendorHub
 </header>
 
-<div class="container">
+<div class="wrapper">
 
-    <div class="images">
-        <!-- Replace filenames below with your exact image names -->
-        <img id="mainImage" src="IMAGE1.png" alt="Dior Saddle Bag">
+    <div class="product-images">
+        <img id="mainImage" src="IMG_6573_2.png" alt="Dior Saddle Bag">
 
         <div class="thumbnails">
-            <img src="IMAGE1.png" onclick="changeImage(this.src)">
-            <img src="IMAGE2.png" onclick="changeImage(this.src)">
-            <img src="IMAGE3.png" onclick="changeImage(this.src)">
-            <img src="IMAGE4.png" onclick="changeImage(this.src)">
-            <img src="IMAGE5.png" onclick="changeImage(this.src)">
+            <img src="IMG_6573_2.png" onclick="changeImage(this.src)">
+            <img src="IMG_6575.png" onclick="changeImage(this.src)">
+            <img src="IMG_6576_2.png" onclick="changeImage(this.src)">
+            <img src="IMG_6577.png" onclick="changeImage(this.src)">
+            <img src="dior saddle PFP.png" onclick="changeImage(this.src)">
         </div>
     </div>
 
-    <div class="info">
+    <div class="product-info">
         <h2>Dior Saddle Bag</h2>
         <div class="price">$100</div>
 
@@ -132,7 +137,7 @@
             <li>Premium quality finish</li>
         </ul>
 
-        <a href="https://t.me/+nCu9Wc7XU585ZmNk" target="_blank" class="btn">
+        <a href="https://t.me/+nCu9Wc7XU585ZmNk" target="_blank" class="buy-btn">
             BUY NOW
         </a>
     </div>
@@ -140,7 +145,7 @@
 </div>
 
 <footer>
-    © 2026 Top Tier Exotics. All rights reserved.
+    © 2026 VendorHub. All rights reserved.
 </footer>
 
 <script>
