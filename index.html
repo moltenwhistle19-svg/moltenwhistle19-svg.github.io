@@ -22,7 +22,6 @@ header {
     padding: 25px 0;
     font-size: 26px;
     font-weight: bold;
-    letter-spacing: 1px;
     border-bottom: 1px solid #222;
 }
 
@@ -70,9 +69,7 @@ header {
     z-index: 1000;
 }
 
-.side-menu.active {
-    left: 0;
-}
+.side-menu.active { left: 0; }
 
 .side-menu a {
     display: block;
@@ -97,7 +94,7 @@ header {
     pointer-events: all;
 }
 
-/* PRODUCT LAYOUT */
+/* LAYOUT */
 .wrapper {
     max-width: 1100px;
     margin: 80px auto;
@@ -109,19 +106,12 @@ header {
     justify-content: center;
 }
 
-/* GALLERY */
 .gallery-container {
     position: relative;
     flex: 1;
     min-width: 320px;
     overflow: hidden;
     border-radius: 12px;
-    opacity: 0;
-    transition: opacity 0.4s ease;
-}
-
-.gallery-container.loaded {
-    opacity: 1;
 }
 
 .gallery-track {
@@ -165,7 +155,6 @@ header {
     margin: 20px 0;
 }
 
-/* BUY BUTTON */
 .buy-btn {
     display: inline-block;
     margin-top: 30px;
@@ -216,16 +205,16 @@ footer {
 
 <div class="wrapper">
 
-    <div class="gallery-container" id="galleryContainer">
+    <div class="gallery-container">
         <div class="arrow arrow-left" onclick="prevSlide()">&#10094;</div>
         <div class="arrow arrow-right" onclick="nextSlide()">&#10095;</div>
 
         <div class="gallery-track" id="galleryTrack">
             <img src="IMG_6573_2.png">
-            <img src="IMG_6575.png">
-            <img src="IMG_6576_2.png">
-            <img src="IMG_6577.png">
-            <img src="dior-saddle-pfp.png">
+            <img data-src="IMG_6575.png">
+            <img data-src="IMG_6576_2.png">
+            <img data-src="IMG_6577.png">
+            <img data-src="dior-saddle-pfp.png">
         </div>
     </div>
 
@@ -243,44 +232,31 @@ footer {
 
 <script>
 
-const imageSources = [
-"IMG_6573_2.png",
-"IMG_6575.png",
-"IMG_6576_2.png",
-"IMG_6577.png",
-"dior-saddle-pfp.png"
-];
-
 const track = document.getElementById("galleryTrack");
-const galleryContainer = document.getElementById("galleryContainer");
+const slides = document.querySelectorAll(".gallery-track img");
 let index = 0;
 
-/* PRELOAD ALL IMAGES */
-let loaded = 0;
-
-imageSources.forEach(src => {
-    const img = new Image();
-    img.src = src;
-    img.onload = () => {
-        loaded++;
-        if (loaded === imageSources.length) {
-            galleryContainer.classList.add("loaded");
+/* Lazy load remaining images in background */
+window.addEventListener("load", () => {
+    slides.forEach(img => {
+        if (img.dataset.src) {
+            img.src = img.dataset.src;
         }
-    };
+    });
 });
 
-/* SLIDE */
+/* Slide */
 function updateSlide() {
     track.style.transform = `translateX(-${index * 100}%)`;
 }
 
 function nextSlide() {
-    index = (index + 1) % imageSources.length;
+    index = (index + 1) % slides.length;
     updateSlide();
 }
 
 function prevSlide() {
-    index = (index - 1 + imageSources.length) % imageSources.length;
+    index = (index - 1 + slides.length) % slides.length;
     updateSlide();
 }
 
