@@ -26,7 +26,7 @@ header {
     border-bottom: 1px solid #222;
 }
 
-/* HAMBURGER */
+/* BURGER */
 .menu-btn {
     position: absolute;
     left: 20px;
@@ -44,7 +44,6 @@ header {
     transition: 0.3s ease;
 }
 
-/* Transform into X */
 .menu-btn.active span:nth-child(1) {
     transform: rotate(45deg) translate(6px, 6px);
 }
@@ -71,30 +70,21 @@ header {
     z-index: 1000;
 }
 
+.side-menu.active {
+    left: 0;
+}
+
 .side-menu a {
     display: block;
     color: white;
     text-decoration: none;
     margin-bottom: 25px;
     font-size: 18px;
-    transition: 0.2s;
 }
 
-.side-menu a:hover {
-    opacity: 0.6;
-}
-
-.side-menu.active {
-    left: 0;
-}
-
-/* OVERLAY when menu open */
 .overlay {
     position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
+    inset: 0;
     background: rgba(0,0,0,0.6);
     opacity: 0;
     pointer-events: none;
@@ -119,16 +109,22 @@ header {
     justify-content: center;
 }
 
-.product-gallery {
+.gallery-container {
     position: relative;
     flex: 1;
     min-width: 320px;
+    overflow: hidden;
+    border-radius: 12px;
 }
 
-.product-gallery img {
+.gallery-track {
+    display: flex;
+    transition: transform 0.45s ease;
+}
+
+.gallery-track img {
     width: 100%;
-    border-radius: 12px;
-    transition: opacity 0.4s ease;
+    flex-shrink: 0;
 }
 
 /* ARROWS */
@@ -136,17 +132,12 @@ header {
     position: absolute;
     top: 50%;
     transform: translateY(-50%);
-    font-size: 24px;
+    font-size: 22px;
     background: rgba(0,0,0,0.6);
     padding: 10px 14px;
     border-radius: 50%;
     cursor: pointer;
-    user-select: none;
-    transition: 0.3s;
-}
-
-.arrow:hover {
-    background: rgba(255,255,255,0.2);
+    z-index: 10;
 }
 
 .arrow-left { left: 15px; }
@@ -211,17 +202,23 @@ footer {
     <a href="https://t.me/+nCu9Wc7XU585ZmNk" target="_blank">Telegram</a>
     <a href="#">Backup Channel</a>
     <a href="#">Instagram</a>
-    <a href="#">Contact</a>
 </div>
 
 <div class="overlay" id="overlay"></div>
 
 <div class="wrapper">
 
-    <div class="product-gallery">
-        <span class="arrow arrow-left" onclick="prevImage()">&#10094;</span>
-        <img id="productImage" src="IMG_6573_2.png">
-        <span class="arrow arrow-right" onclick="nextImage()">&#10095;</span>
+    <div class="gallery-container">
+        <div class="arrow arrow-left" onclick="prevSlide()">&#10094;</div>
+        <div class="arrow arrow-right" onclick="nextSlide()">&#10095;</div>
+
+        <div class="gallery-track" id="galleryTrack">
+            <img src="IMG_6573_2.png">
+            <img src="IMG_6575.png">
+            <img src="IMG_6576_2.png">
+            <img src="IMG_6577.png">
+            <img src="dior-saddle-pfp.png">
+        </div>
     </div>
 
     <div class="product-info">
@@ -238,36 +235,25 @@ footer {
 
 <script>
 
-const images = [
-"IMG_6573_2.png",
-"IMG_6575.png",
-"IMG_6576_2.png",
-"IMG_6577.png",
-"dior saddle PFP.png"
-];
+const track = document.getElementById("galleryTrack");
+const slides = document.querySelectorAll(".gallery-track img");
+let index = 0;
 
-let currentIndex = 0;
-
-function showImage(index) {
-    const img = document.getElementById("productImage");
-    img.style.opacity = 0;
-    setTimeout(() => {
-        img.src = images[index];
-        img.style.opacity = 1;
-    }, 200);
+function updateSlide() {
+    track.style.transform = `translateX(-${index * 100}%)`;
 }
 
-function nextImage() {
-    currentIndex = (currentIndex + 1) % images.length;
-    showImage(currentIndex);
+function nextSlide() {
+    index = (index + 1) % slides.length;
+    updateSlide();
 }
 
-function prevImage() {
-    currentIndex = (currentIndex - 1 + images.length) % images.length;
-    showImage(currentIndex);
+function prevSlide() {
+    index = (index - 1 + slides.length) % slides.length;
+    updateSlide();
 }
 
-/* MENU LOGIC */
+/* MENU */
 const menuBtn = document.getElementById("menuBtn");
 const sideMenu = document.getElementById("sideMenu");
 const overlay = document.getElementById("overlay");
