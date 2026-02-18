@@ -1,130 +1,203 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>VendorHub</title>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>VendorHub</title>
 
-    <style>
-        body {
-            margin: 0;
-            font-family: Arial, sans-serif;
-            background-color: #0f0f0f;
-            color: white;
-        }
+<style>
 
-        header {
-            text-align: center;
-            padding: 40px 20px;
-            border-bottom: 1px solid #222;
-            font-size: 28px;
-            font-weight: bold;
-        }
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background: #141414;
+    color: white;
+    overflow-x: hidden;
+}
 
-        .wrapper {
-            max-width: 1100px;
-            margin: 60px auto;
-            padding: 20px;
-            display: flex;
-            gap: 60px;
-            flex-wrap: wrap;
-            align-items: center;
-            justify-content: center;
-        }
+/* HEADER */
+header {
+    position: relative;
+    text-align: center;
+    padding: 25px 0;
+    font-size: 26px;
+    font-weight: bold;
+    letter-spacing: 1px;
+    border-bottom: 1px solid #222;
+}
 
-        .product-images {
-            flex: 1;
-            min-width: 320px;
-        }
+/* HAMBURGER */
+.menu-btn {
+    position: absolute;
+    left: 20px;
+    top: 28px;
+    cursor: pointer;
+    width: 30px;
+}
 
-        .product-images img {
-            width: 100%;
-            border-radius: 10px;
-        }
+.menu-btn div {
+    height: 3px;
+    background: white;
+    margin: 6px 0;
+    transition: 0.3s;
+}
 
-        .thumbnails {
-            display: flex;
-            gap: 10px;
-            margin-top: 15px;
-        }
+/* SIDE MENU */
+.side-menu {
+    position: fixed;
+    top: 0;
+    left: -280px;
+    width: 260px;
+    height: 100%;
+    background: #1c1c1c;
+    padding: 60px 25px;
+    transition: 0.4s ease;
+    box-shadow: 5px 0 20px rgba(0,0,0,0.4);
+}
 
-        .thumbnails img {
-            width: 75px;
-            border-radius: 6px;
-            cursor: pointer;
-            opacity: 0.6;
-            transition: 0.2s;
-        }
+.side-menu a {
+    display: block;
+    color: white;
+    text-decoration: none;
+    margin-bottom: 25px;
+    font-size: 18px;
+    transition: 0.2s;
+}
 
-        .thumbnails img:hover {
-            opacity: 1;
-        }
+.side-menu a:hover {
+    opacity: 0.6;
+}
 
-        .product-info {
-            flex: 1;
-            min-width: 300px;
-        }
+.side-menu.active {
+    left: 0;
+}
 
-        .product-info h2 {
-            font-size: 32px;
-            margin-bottom: 10px;
-        }
+/* PRODUCT SECTION */
+.wrapper {
+    max-width: 1100px;
+    margin: 80px auto;
+    padding: 20px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 60px;
+    align-items: center;
+    justify-content: center;
+}
 
-        .price {
-            font-size: 24px;
-            margin: 15px 0;
-        }
+.product-gallery {
+    position: relative;
+    flex: 1;
+    min-width: 320px;
+    overflow: hidden;
+}
 
-        ul {
-            line-height: 1.8;
-            padding-left: 18px;
-        }
+.product-gallery img {
+    width: 100%;
+    border-radius: 12px;
+    transition: transform 0.5s ease, opacity 0.4s ease;
+}
 
-        .buy-btn {
-            display: inline-block;
-            margin-top: 25px;
-            padding: 15px 50px;
-            background: #ff9900;
-            color: black;
-            font-weight: bold;
-            text-decoration: none;
-            border-radius: 6px;
-            transition: 0.2s;
-        }
+/* ARROWS */
+.arrow {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 28px;
+    background: rgba(0,0,0,0.5);
+    padding: 10px 14px;
+    border-radius: 50%;
+    cursor: pointer;
+    user-select: none;
+    transition: 0.3s;
+}
 
-        .buy-btn:hover {
-            opacity: 0.85;
-        }
+.arrow:hover {
+    background: rgba(255,255,255,0.2);
+}
 
-        footer {
-            text-align: center;
-            padding: 40px;
-            border-top: 1px solid #222;
-            margin-top: 60px;
-            font-size: 14px;
-            opacity: 0.6;
-        }
-    </style>
+.arrow-left {
+    left: 15px;
+}
+
+.arrow-right {
+    right: 15px;
+}
+
+.product-info {
+    flex: 1;
+    min-width: 300px;
+}
+
+.product-info h2 {
+    font-size: 34px;
+    margin-bottom: 10px;
+}
+
+.price {
+    font-size: 24px;
+    margin: 20px 0;
+}
+
+.product-info ul {
+    line-height: 1.8;
+    padding-left: 18px;
+}
+
+/* BUY BUTTON */
+.buy-btn {
+    display: inline-block;
+    margin-top: 30px;
+    padding: 16px 60px;
+    background: #ff9900;
+    color: black;
+    font-weight: bold;
+    text-decoration: none;
+    border-radius: 50px;
+    transition: all 0.3s ease;
+}
+
+.buy-btn:hover {
+    padding: 16px 80px;
+    box-shadow: 0 0 15px rgba(255,153,0,0.6);
+}
+
+/* FOOTER */
+footer {
+    text-align: center;
+    padding: 50px;
+    border-top: 1px solid #222;
+    margin-top: 80px;
+    font-size: 14px;
+    opacity: 0.6;
+}
+
+</style>
 </head>
 
 <body>
 
 <header>
+    <div class="menu-btn" onclick="toggleMenu()">
+        <div></div>
+        <div></div>
+        <div></div>
+    </div>
     VendorHub
 </header>
 
+<div class="side-menu" id="sideMenu">
+    <a href="https://t.me/+nCu9Wc7XU585ZmNk" target="_blank">Telegram Channel</a>
+    <a href="#">Backup Channel</a>
+    <a href="#">Instagram</a>
+    <a href="#">Contact</a>
+</div>
+
 <div class="wrapper">
 
-    <div class="product-images">
-        <img id="mainImage" src="IMG_6573_2.png" alt="Dior Saddle Bag">
-
-        <div class="thumbnails">
-            <img src="IMG_6573_2.png" onclick="changeImage(this.src)">
-            <img src="IMG_6575.png" onclick="changeImage(this.src)">
-            <img src="IMG_6576_2.png" onclick="changeImage(this.src)">
-            <img src="IMG_6577.png" onclick="changeImage(this.src)">
-            <img src="dior saddle PFP.png" onclick="changeImage(this.src)">
-        </div>
+    <div class="product-gallery">
+        <span class="arrow arrow-left" onclick="prevImage()">&#10094;</span>
+        <img id="productImage" src="IMG_6573_2.png">
+        <span class="arrow arrow-right" onclick="nextImage()">&#10095;</span>
     </div>
 
     <div class="product-info">
@@ -149,9 +222,42 @@
 </footer>
 
 <script>
-function changeImage(src) {
-    document.getElementById("mainImage").src = src;
+
+let images = [
+"IMG_6573_2.png",
+"IMG_6575.png",
+"IMG_6576_2.png",
+"IMG_6577.png",
+"dior saddle PFP.png"
+];
+
+let currentIndex = 0;
+
+function showImage(index) {
+    const img = document.getElementById("productImage");
+    img.style.opacity = 0;
+    img.style.transform = "translateX(20px)";
+    setTimeout(() => {
+        img.src = images[index];
+        img.style.opacity = 1;
+        img.style.transform = "translateX(0)";
+    }, 200);
 }
+
+function nextImage() {
+    currentIndex = (currentIndex + 1) % images.length;
+    showImage(currentIndex);
+}
+
+function prevImage() {
+    currentIndex = (currentIndex - 1 + images.length) % images.length;
+    showImage(currentIndex);
+}
+
+function toggleMenu() {
+    document.getElementById("sideMenu").classList.toggle("active");
+}
+
 </script>
 
 </body>
