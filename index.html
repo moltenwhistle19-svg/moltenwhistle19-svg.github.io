@@ -7,32 +7,95 @@
 
 <style>
 
+/* =========================
+GLOBAL
+========================= */
+
+html {
+    scroll-behavior: smooth;
+}
+
 body {
     margin: 0;
     font-family: Arial, sans-serif;
-    background: #141414;
+    background: linear-gradient(135deg, #0f0f0f, #181818);
     color: white;
     overflow-x: hidden;
 }
 
-/* HEADER */
-header {
-    position: relative;
+/* =========================
+HERO SECTION
+========================= */
+
+.hero {
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
     text-align: center;
-    padding: 25px 0;
-    font-size: 26px;
+    padding: 20px;
+}
+
+.hero img {
+    max-width: 600px;
+    width: 90%;
+    margin-bottom: 30px;
+}
+
+.hero h2 {
+    font-weight: 400;
+    opacity: 0.7;
+    margin-bottom: 40px;
+}
+
+.hero-btn {
+    padding: 18px 60px;
+    background: #ff9900;
+    border-radius: 50px;
+    color: black;
     font-weight: bold;
-    border-bottom: 1px solid #222;
+    text-decoration: none;
+    transition: all 0.3s ease;
+}
+
+.hero-btn:hover {
+    padding: 18px 80px;
+    box-shadow: 0 0 25px rgba(255,153,0,0.5);
+}
+
+/* =========================
+STICKY HEADER
+========================= */
+
+.header {
+    position: fixed;
+    top: -100px;
+    left: 0;
+    width: 100%;
+    background: rgba(15,15,15,0.95);
+    backdrop-filter: blur(10px);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 30px;
+    transition: 0.4s ease;
+    z-index: 1000;
+}
+
+.header.active {
+    top: 0;
+}
+
+.header img {
+    height: 40px;
 }
 
 /* BURGER */
+
 .menu-btn {
-    position: absolute;
-    left: 20px;
-    top: 25px;
     cursor: pointer;
     width: 30px;
-    z-index: 1001;
 }
 
 .menu-btn span {
@@ -56,6 +119,7 @@ header {
 }
 
 /* SIDE MENU */
+
 .side-menu {
     position: fixed;
     top: 0;
@@ -63,19 +127,20 @@ header {
     width: 260px;
     height: 100%;
     background: #1c1c1c;
-    padding: 80px 25px;
+    padding: 100px 30px;
     transition: 0.4s ease;
-    box-shadow: 5px 0 25px rgba(0,0,0,0.6);
-    z-index: 1000;
+    z-index: 999;
 }
 
-.side-menu.active { left: 0; }
+.side-menu.active {
+    left: 0;
+}
 
 .side-menu a {
     display: block;
     color: white;
     text-decoration: none;
-    margin-bottom: 25px;
+    margin-bottom: 30px;
     font-size: 18px;
 }
 
@@ -86,7 +151,7 @@ header {
     opacity: 0;
     pointer-events: none;
     transition: 0.3s;
-    z-index: 999;
+    z-index: 998;
 }
 
 .overlay.active {
@@ -94,11 +159,17 @@ header {
     pointer-events: all;
 }
 
-/* LAYOUT */
-.wrapper {
+/* =========================
+PRODUCT SECTION
+========================= */
+
+.products {
+    padding: 120px 20px;
     max-width: 1100px;
-    margin: 80px auto;
-    padding: 20px;
+    margin: auto;
+}
+
+.product-wrapper {
     display: flex;
     flex-wrap: wrap;
     gap: 60px;
@@ -126,6 +197,7 @@ header {
 }
 
 /* ARROWS */
+
 .arrow {
     position: absolute;
     top: 50%;
@@ -172,29 +244,29 @@ header {
     box-shadow: 0 0 20px rgba(255,153,0,0.6);
 }
 
-footer {
-    text-align: center;
-    padding: 50px;
-    border-top: 1px solid #222;
-    margin-top: 80px;
-    font-size: 14px;
-    opacity: 0.6;
-}
-
 </style>
 </head>
 
 <body>
 
-<header>
+<!-- HERO -->
+<section class="hero">
+    <img src="YOUR-LOGO-FILENAME.png">
+    <h2>Premium Products. Direct Access.</h2>
+    <a href="#products" class="hero-btn">Enter Store</a>
+</section>
+
+<!-- STICKY HEADER -->
+<div class="header" id="header">
+    <img src="YOUR-LOGO-FILENAME.png">
     <div class="menu-btn" id="menuBtn">
         <span></span>
         <span></span>
         <span></span>
     </div>
-    VendorHub
-</header>
+</div>
 
+<!-- SIDE MENU -->
 <div class="side-menu" id="sideMenu">
     <a href="https://t.me/+nCu9Wc7XU585ZmNk" target="_blank">Telegram</a>
     <a href="#">Backup Channel</a>
@@ -203,49 +275,50 @@ footer {
 
 <div class="overlay" id="overlay"></div>
 
-<div class="wrapper">
+<!-- PRODUCTS -->
+<section class="products" id="products">
+    <div class="product-wrapper">
 
-    <div class="gallery-container">
-        <div class="arrow arrow-left" onclick="prevSlide()">&#10094;</div>
-        <div class="arrow arrow-right" onclick="nextSlide()">&#10095;</div>
+        <div class="gallery-container">
+            <div class="arrow arrow-left" onclick="prevSlide()">&#10094;</div>
+            <div class="arrow arrow-right" onclick="nextSlide()">&#10095;</div>
 
-        <div class="gallery-track" id="galleryTrack">
-            <img src="IMG_6573_2.png">
-            <img data-src="IMG_6575.png">
-            <img data-src="IMG_6576_2.png">
-            <img data-src="IMG_6577.png">
-            <img data-src="dior-saddle-pfp.png">
+            <div class="gallery-track" id="galleryTrack">
+                <img src="IMG_6573_2.png">
+                <img src="IMG_6575.png">
+                <img src="IMG_6576_2.png">
+                <img src="IMG_6577.png">
+                <img src="dior-saddle-pfp.png">
+            </div>
         </div>
+
+        <div class="product-info">
+            <h2>Dior Saddle Bag</h2>
+            <div class="price">$100</div>
+            <a href="https://t.me/+nCu9Wc7XU585ZmNk" target="_blank" class="buy-btn">BUY NOW</a>
+        </div>
+
     </div>
-
-    <div class="product-info">
-        <h2>Dior Saddle Bag</h2>
-        <div class="price">$100</div>
-        <a href="https://t.me/+nCu9Wc7XU585ZmNk" target="_blank" class="buy-btn">BUY NOW</a>
-    </div>
-
-</div>
-
-<footer>
-© 2026 VendorHub
-</footer>
+</section>
 
 <script>
 
+/* HEADER SHOW ON SCROLL */
+const header = document.getElementById("header");
+
+window.addEventListener("scroll", () => {
+    if (window.scrollY > 200) {
+        header.classList.add("active");
+    } else {
+        header.classList.remove("active");
+    }
+});
+
+/* GALLERY */
 const track = document.getElementById("galleryTrack");
 const slides = document.querySelectorAll(".gallery-track img");
 let index = 0;
 
-/* Lazy load remaining images in background */
-window.addEventListener("load", () => {
-    slides.forEach(img => {
-        if (img.dataset.src) {
-            img.src = img.dataset.src;
-        }
-    });
-});
-
-/* Slide */
 function updateSlide() {
     track.style.transform = `translateX(-${index * 100}%)`;
 }
