@@ -7,66 +7,74 @@
 
 <style>
 
-/* =========================
-GLOBAL
-========================= */
+/* ========= GLOBAL ========= */
 
-html {
-    scroll-behavior: smooth;
-}
+html { scroll-behavior: smooth; }
 
 body {
     margin: 0;
-    font-family: Arial, sans-serif;
-    background: linear-gradient(135deg, #0f0f0f, #181818);
+    font-family: 'Arial', sans-serif;
+    background: radial-gradient(circle at top, #1a1a1a 0%, #0f0f0f 60%);
     color: white;
     overflow-x: hidden;
 }
 
-/* =========================
-HERO SECTION
-========================= */
+/* ========= HERO ========= */
 
 .hero {
     height: 100vh;
     display: flex;
-    flex-direction: column;
     justify-content: center;
     align-items: center;
+    position: relative;
     text-align: center;
-    padding: 20px;
+    flex-direction: column;
+}
+
+.hero::before {
+    content: "";
+    position: absolute;
+    width: 500px;
+    height: 500px;
+    background: rgba(255,153,0,0.08);
+    filter: blur(120px);
+    border-radius: 50%;
+    z-index: 0;
 }
 
 .hero img {
-    max-width: 600px;
-    width: 90%;
-    margin-bottom: 30px;
+    width: 520px;
+    max-width: 90%;
+    position: relative;
+    z-index: 1;
 }
 
-.hero h2 {
-    font-weight: 400;
+.hero p {
+    margin-top: 25px;
+    font-size: 18px;
     opacity: 0.7;
-    margin-bottom: 40px;
+    letter-spacing: 1px;
+    z-index: 1;
 }
 
 .hero-btn {
-    padding: 18px 60px;
+    margin-top: 40px;
+    padding: 18px 70px;
     background: #ff9900;
     border-radius: 50px;
     color: black;
     font-weight: bold;
     text-decoration: none;
-    transition: all 0.3s ease;
+    transition: 0.3s ease;
+    z-index: 1;
 }
 
 .hero-btn:hover {
-    padding: 18px 80px;
-    box-shadow: 0 0 25px rgba(255,153,0,0.5);
+    transform: scale(1.05);
+    box-shadow: 0 0 35px rgba(255,153,0,0.5);
 }
 
-/* =========================
-STICKY HEADER
-========================= */
+/* ========= HEADER ========= */
 
 .header {
     position: fixed;
@@ -74,28 +82,26 @@ STICKY HEADER
     left: 0;
     width: 100%;
     background: rgba(15,15,15,0.95);
-    backdrop-filter: blur(10px);
+    backdrop-filter: blur(12px);
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 15px 30px;
+    padding: 15px 40px;
     transition: 0.4s ease;
     z-index: 1000;
 }
 
-.header.active {
-    top: 0;
-}
+.header.active { top: 0; }
 
 .header img {
-    height: 40px;
+    height: 36px;
 }
 
-/* BURGER */
+/* ========= BURGER ========= */
 
 .menu-btn {
+    width: 28px;
     cursor: pointer;
-    width: 30px;
 }
 
 .menu-btn span {
@@ -107,18 +113,14 @@ STICKY HEADER
 }
 
 .menu-btn.active span:nth-child(1) {
-    transform: rotate(45deg) translate(6px, 6px);
+    transform: rotate(45deg) translate(6px,6px);
 }
-
-.menu-btn.active span:nth-child(2) {
-    opacity: 0;
-}
-
+.menu-btn.active span:nth-child(2) { opacity: 0; }
 .menu-btn.active span:nth-child(3) {
-    transform: rotate(-45deg) translate(7px, -7px);
+    transform: rotate(-45deg) translate(6px,-6px);
 }
 
-/* SIDE MENU */
+/* ========= SIDE MENU ========= */
 
 .side-menu {
     position: fixed;
@@ -126,15 +128,13 @@ STICKY HEADER
     left: -280px;
     width: 260px;
     height: 100%;
-    background: #1c1c1c;
-    padding: 100px 30px;
+    background: #141414;
+    padding: 120px 30px;
     transition: 0.4s ease;
     z-index: 999;
 }
 
-.side-menu.active {
-    left: 0;
-}
+.side-menu.active { left: 0; }
 
 .side-menu a {
     display: block;
@@ -159,20 +159,18 @@ STICKY HEADER
     pointer-events: all;
 }
 
-/* =========================
-PRODUCT SECTION
-========================= */
+/* ========= PRODUCTS ========= */
 
 .products {
-    padding: 120px 20px;
-    max-width: 1100px;
+    padding: 140px 20px;
+    max-width: 1150px;
     margin: auto;
 }
 
 .product-wrapper {
     display: flex;
     flex-wrap: wrap;
-    gap: 60px;
+    gap: 70px;
     align-items: center;
     justify-content: center;
 }
@@ -187,7 +185,7 @@ PRODUCT SECTION
 
 .gallery-track {
     display: flex;
-    transition: transform 0.45s ease;
+    transition: transform 0.5s ease;
 }
 
 .gallery-track img {
@@ -202,16 +200,16 @@ PRODUCT SECTION
     position: absolute;
     top: 50%;
     transform: translateY(-50%);
-    font-size: 22px;
     background: rgba(0,0,0,0.6);
-    padding: 10px 14px;
+    padding: 12px 16px;
     border-radius: 50%;
     cursor: pointer;
-    z-index: 10;
 }
 
 .arrow-left { left: 15px; }
 .arrow-right { right: 15px; }
+
+/* PRODUCT INFO */
 
 .product-info {
     flex: 1;
@@ -219,29 +217,34 @@ PRODUCT SECTION
 }
 
 .product-info h2 {
-    font-size: 34px;
+    font-size: 36px;
+    margin-bottom: 15px;
+}
+
+.product-info p {
+    opacity: 0.7;
+    line-height: 1.6;
+    margin-bottom: 25px;
 }
 
 .price {
-    font-size: 24px;
-    margin: 20px 0;
+    font-size: 26px;
+    margin-bottom: 25px;
 }
 
 .buy-btn {
-    display: inline-block;
-    margin-top: 30px;
-    padding: 16px 60px;
+    padding: 16px 65px;
     background: #ff9900;
+    border-radius: 50px;
     color: black;
     font-weight: bold;
     text-decoration: none;
-    border-radius: 50px;
-    transition: all 0.3s ease;
+    transition: 0.3s ease;
 }
 
 .buy-btn:hover {
-    padding: 16px 80px;
-    box-shadow: 0 0 20px rgba(255,153,0,0.6);
+    transform: scale(1.05);
+    box-shadow: 0 0 25px rgba(255,153,0,0.6);
 }
 
 </style>
@@ -252,11 +255,11 @@ PRODUCT SECTION
 <!-- HERO -->
 <section class="hero">
     <img src="YOUR-LOGO-FILENAME.png">
-    <h2>Premium Products. Direct Access.</h2>
+    <p>Exclusive Access. Premium Products.</p>
     <a href="#products" class="hero-btn">Enter Store</a>
 </section>
 
-<!-- STICKY HEADER -->
+<!-- HEADER -->
 <div class="header" id="header">
     <img src="YOUR-LOGO-FILENAME.png">
     <div class="menu-btn" id="menuBtn">
@@ -294,6 +297,11 @@ PRODUCT SECTION
 
         <div class="product-info">
             <h2>Dior Saddle Bag</h2>
+            <p>
+                Premium quality saddle bag crafted with detailed stitching,
+                structured silhouette, and statement hardware.
+                Direct access. Fast response.
+            </p>
             <div class="price">$100</div>
             <a href="https://t.me/+nCu9Wc7XU585ZmNk" target="_blank" class="buy-btn">BUY NOW</a>
         </div>
@@ -303,18 +311,18 @@ PRODUCT SECTION
 
 <script>
 
-/* HEADER SHOW ON SCROLL */
+/* Header reveal */
 const header = document.getElementById("header");
 
 window.addEventListener("scroll", () => {
-    if (window.scrollY > 200) {
+    if (window.scrollY > 250) {
         header.classList.add("active");
     } else {
         header.classList.remove("active");
     }
 });
 
-/* GALLERY */
+/* Gallery */
 const track = document.getElementById("galleryTrack");
 const slides = document.querySelectorAll(".gallery-track img");
 let index = 0;
@@ -333,7 +341,7 @@ function prevSlide() {
     updateSlide();
 }
 
-/* MENU */
+/* Menu */
 const menuBtn = document.getElementById("menuBtn");
 const sideMenu = document.getElementById("sideMenu");
 const overlay = document.getElementById("overlay");
